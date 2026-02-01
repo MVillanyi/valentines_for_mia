@@ -1,91 +1,45 @@
-const card = document.getElementById("card");
-const noButton = document.getElementById("no");
-const yesButton = document.getElementById("yes");
-const arena = document.getElementById("arena");
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
+const card = document.getElementById("ask");
 const overlay = document.getElementById("overlay");
-const resetButton = document.getElementById("reset");
-const secret = document.getElementById("secret");
+const overlayTitle = document.getElementById("overlayTitle");
 const overlayText = document.getElementById("overlayText");
+const next = document.getElementById("next");
 
-function moveNo() {
-  const padding = 10;
+no.addEventListener("mouseenter", () => {
+  const x = Math.random() * 240;
+  const y = Math.random() * 70;
+  no.style.transform = `translate(${x}px, ${y}px)`;
+});
 
-  const arenaRect = arena.getBoundingClientRect();
-  const noRect = noButton.getBoundingClientRect();
-  const yesRect = yesButton.getBoundingClientRect();
-
-  const maxX = arenaRect.width - noRect.width - padding;
-  const maxY = arenaRect.height - noRect.height - padding;
-
-  if (maxX <= padding || maxY <= padding) return;
-
-  const yesX = yesRect.left - arenaRect.left;
-  const yesY = yesRect.top - arenaRect.top;
-
-  let x = 0;
-  let y = 0;
-  let overlap = true;
-  let tries = 0;
-
-  while (overlap && tries < 80) {
-    tries += 1;
-
-    x = Math.random() * maxX + padding;
-    y = Math.random() * maxY + padding;
-
-    overlap = !(
-      x + noRect.width < yesX ||
-      x > yesX + yesRect.width ||
-      y + noRect.height < yesY ||
-      y > yesY + yesRect.height
-    );
-  }
-
-  noButton.style.left = `${x}px`;
-  noButton.style.top = `${y}px`;
-}
-
-noButton.addEventListener("mouseenter", moveNo);
-noButton.addEventListener("touchstart", (e) => {
-  e.preventDefault();
-  moveNo();
-}, { passive: false });
-
-yesButton.addEventListener("click", () => {
-  overlay.classList.add("isVisible");
-  overlay.setAttribute("aria-hidden", "false");
-  overlayText.textContent = "Okay.";
+yes.addEventListener("click", () => {
   card.classList.add("isHidden");
+
+  overlayTitle.textContent = "Hurray!";
+  overlayText.innerHTML =
+    "Mark the 14th of February as our day in your calendar.<br>I can’t wait to spend time with you.";
+
+  overlay.classList.add("isVisible");
+
+  confetti({
+    particleCount: 60,
+    spread: 70,
+    origin: { y: 0.6 },
+    colors: ["#e63973", "#7a1f3d", "#ffffff"],
+    scalar: 0.9
+  });
+
+  setTimeout(() => {
+    confetti({
+      particleCount: 35,
+      spread: 55,
+      origin: { y: 0.55 },
+      colors: ["#e63973", "#7a1f3d"],
+      scalar: 0.8
+    });
+  }, 250);
 });
 
-resetButton.addEventListener("click", () => {
+next.addEventListener("click", () => {
   overlay.classList.remove("isVisible");
-  overlay.setAttribute("aria-hidden", "true");
-  overlayText.textContent = "Okay.";
-  card.classList.remove("isHidden");
-});
-
-let buffer = "";
-let eggTimer = null;
-
-window.addEventListener("keydown", (e) => {
-  const key = (e.key || "").toLowerCase();
-  if (!key.match(/^[a-z]$/)) return;
-
-  buffer = (buffer + key).slice(-18);
-
-  if (buffer.includes("husband")) {
-    overlayText.textContent = "Okay, husband.";
-    buffer = "";
-
-    if (eggTimer) clearTimeout(eggTimer);
-    eggTimer = setTimeout(() => {
-      overlayText.textContent = "Okay.";
-    }, 2000);
-  }
-});
-
-window.addEventListener("load", () => {
-  noButton.style.left = "210px";
-  noButton.style.top = "14px";
 });
