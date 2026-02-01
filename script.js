@@ -1,9 +1,29 @@
 const pages = document.querySelectorAll(".card");
 
+function revealImagesWithin(container) {
+  const imgs = Array.from(container.querySelectorAll(".content-image"));
+  imgs.forEach(img => {
+    img.classList.remove("is-visible");
+
+    const makeVisible = () => {
+      requestAnimationFrame(() => img.classList.add("is-visible"));
+    };
+
+    if (img.complete && img.naturalWidth > 0) {
+      makeVisible();
+    } else {
+      img.addEventListener("load", makeVisible, { once: true });
+      img.addEventListener("error", () => makeVisible(), { once: true });
+    }
+  });
+}
+
 function showPage(id) {
   pages.forEach(p => p.classList.add("hidden"));
   const el = document.getElementById(id);
-  if (el) el.classList.remove("hidden");
+  if (!el) return;
+  el.classList.remove("hidden");
+  revealImagesWithin(el);
 }
 
 const noBtn = document.getElementById("no");
@@ -33,14 +53,27 @@ noBtn.addEventListener("click", moveNoInsideBox);
 
 yesBtn.addEventListener("click", () => {
   showPage("page-hurray");
+
   if (typeof confetti === "function") {
     confetti({
       particleCount: 70,
-      spread: 45,
+      spread: 55,
       startVelocity: 18,
-      scalar: 0.8,
-      origin: { y: 0.65 }
+      scalar: 0.9,
+      origin: { y: 0.65 },
+      colors: ["#7b0b2a", "#c2185b", "#ffffff"]
     });
+
+    setTimeout(() => {
+      confetti({
+        particleCount: 40,
+        spread: 45,
+        startVelocity: 14,
+        scalar: 0.85,
+        origin: { y: 0.6 },
+        colors: ["#7b0b2a", "#c2185b"]
+      });
+    }, 220);
   }
 });
 
@@ -67,7 +100,7 @@ function setReveal(index) {
     revealImg.src = `favorite_${index}.png`;
     revealImg.alt = `Favorite ${index}`;
     revealCount.textContent = `${index} of ${revealTotal}`;
-    revealImg.classList.add("is-visible");
+    revealImagesWithin(document.getElementById("page-favorites"));
   }, 120);
 
   if (index >= revealTotal) {
