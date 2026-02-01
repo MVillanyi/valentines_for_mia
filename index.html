@@ -42,8 +42,13 @@
 
     <section class="card hidden" id="page-favorites">
       <h2>My favorite pictures of you</h2>
-      <div id="gallery" class="gallery" aria-label="favorite pictures"></div>
-      <button class="next" type="button" data-next="page-last">One last thing</button>
+
+      <div id="revealWrap" aria-label="favorite pictures reveal">
+        <img id="revealImg" class="content-image" src="" alt="Favorite" />
+        <div id="revealCount" class="copy"></div>
+      </div>
+
+      <button id="revealNext" class="next" type="button">Show me the next one</button>
     </section>
 
     <section class="card hidden" id="page-last">
