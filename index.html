@@ -4,34 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Valentine</title>
-  <link rel="stylesheet" href="./style.css?v=14" />
+  <!-- #no peeking Mia. Thats not fair -->
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body data-note="#no peeking Mia. Thats not fair">
+<body>
   <main class="wrap">
-    <section class="card" id="card">
-      <div class="topline">For Mia</div>
+
+    <section class="card" id="ask">
+      <div class="topline">Mia,</div>
       <h1>Will you be my Valentine?</h1>
 
       <div class="buttons" id="arena">
         <button id="yes" type="button">Yes</button>
         <button id="no" type="button">No</button>
       </div>
-
-      <p class="secret" id="secret" aria-live="polite"></p>
     </section>
 
     <section class="overlay" id="overlay" aria-hidden="true">
       <div class="overlayCard">
-        <img src="./us.png" alt="Our picture" class="memoryImage" />
-        <div class="overlayText">
-          This is our picture.<br />
-          I can’t wait to take the next one.
-        </div>
-        <button class="reset" id="reset" type="button">Back</button>
+        <h1 class="overlayTitle" id="overlayTitle"></h1>
+        <p class="overlayText" id="overlayText"></p>
+        <button class="reset" id="next" type="button">There’s more →</button>
       </div>
     </section>
+
   </main>
 
-  <script src="./script.js?v=14" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
