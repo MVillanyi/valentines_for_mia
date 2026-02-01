@@ -1,11 +1,11 @@
 * { box-sizing: border-box; }
 
 body {
-  height: 100vh;
   margin: 0;
+  height: 100vh;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   background: radial-gradient(circle at top, #f6d1dc, #e8b6c5);
-  color: #ffffff;
+  color: #fff;
 }
 
 .wrap {
@@ -19,11 +19,10 @@ body {
   width: min(420px, 92vw);
   background: linear-gradient(180deg, #131318, #0f0f12);
   border-radius: 18px;
-  padding: 28px 28px 22px;
+  padding: 28px;
   text-align: center;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  transition: opacity 240ms ease, transform 240ms ease;
+  box-shadow: 0 25px 60px rgba(0,0,0,.45);
+  transition: opacity .25s ease, transform .25s ease;
 }
 
 .card.isHidden {
@@ -33,26 +32,24 @@ body {
 }
 
 .topline {
-  font-size: 0.85rem;
-  letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.78);
-  margin-bottom: 10px;
+  font-size: .85rem;
+  color: rgba(255,255,255,.75);
+  margin-bottom: 8px;
 }
 
 h1 {
-  margin: 10px 0 0;
   font-size: 1.55rem;
   font-weight: 650;
 }
 
 .buttons {
-  margin-top: 18px;
+  margin-top: 20px;
   position: relative;
   height: 110px;
 }
 
 button {
-  padding: 0.75rem 1.7rem;
+  padding: .75rem 1.7rem;
   font-size: 1rem;
   border-radius: 999px;
   border: none;
@@ -60,29 +57,28 @@ button {
 }
 
 #yes {
-  background: linear-gradient(135deg, #e63973, #7a1f3d);
+  background: linear-gradient(135deg,#e63973,#7a1f3d);
   color: white;
-  box-shadow: 0 10px 26px rgba(230, 57, 115, 0.35);
 }
 
 #no {
   position: absolute;
-  background: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.86);
   left: 180px;
-  top: 10px;
+  top: 12px;
+  background: rgba(255,255,255,.1);
+  color: rgba(255,255,255,.85);
 }
 
 .overlay {
   position: fixed;
   inset: 0;
+  background: rgba(0,0,0,.78);
+  backdrop-filter: blur(6px);
   display: grid;
   place-items: center;
-  background: rgba(0, 0, 0, 0.78);
-  backdrop-filter: blur(6px);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 280ms ease;
+  transition: opacity .3s ease;
 }
 
 .overlay.isVisible {
@@ -91,27 +87,34 @@ button {
 }
 
 .overlayCard {
-  width: min(520px, 92vw);
-  background: linear-gradient(180deg, #131318, #0f0f12);
+  width: min(820px, 94vw);
+  max-height: 86vh;
+  background: linear-gradient(180deg,#131318,#0f0f12);
   border-radius: 18px;
-  padding: 34px 26px;
+  padding: 28px;
   text-align: center;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55);
+  overflow-y: auto;
 }
 
-.overlayTitle {
-  font-size: 1.7rem;
-  font-weight: 700;
-  margin-bottom: 12px;
+.overlayCard img {
+  max-width: 100%;
+  border-radius: 14px;
+  margin: 14px 0;
 }
 
-.overlayText {
-  font-size: 1.05rem;
-  line-height: 1.4;
-  margin-bottom: 20px;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+  gap: 10px;
+}
+
+.grid img {
+  width: 100%;
+  border-radius: 12px;
 }
 
 .reset {
-  background: rgba(255, 255, 255, 0.12);
+  margin-top: 18px;
+  background: rgba(255,255,255,.12);
   color: white;
 }
