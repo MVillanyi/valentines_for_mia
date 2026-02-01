@@ -5,15 +5,15 @@ function revealImagesWithin(container) {
   imgs.forEach(img => {
     img.classList.remove("is-visible");
 
-    const makeVisible = () => {
+    const show = () => {
       requestAnimationFrame(() => img.classList.add("is-visible"));
     };
 
     if (img.complete && img.naturalWidth > 0) {
-      makeVisible();
+      show();
     } else {
-      img.addEventListener("load", makeVisible, { once: true });
-      img.addEventListener("error", () => makeVisible(), { once: true });
+      img.addEventListener("load", show, { once: true });
+      img.addEventListener("error", show, { once: true });
     }
   });
 }
