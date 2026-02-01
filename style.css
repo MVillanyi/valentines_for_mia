@@ -117,3 +117,17 @@ button {
   opacity: 1;
   transform: translateY(0);
 }
+
+@media (max-width: 520px) {
+  .card {
+    padding: 30px 22px 34px;
+  }
+
+  h1, h2 {
+    font-size: 30px;
+  }
+
+  .buttons {
+    width: 300px;
+  }
+}
