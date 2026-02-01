@@ -1,6 +1,8 @@
 const noButton = document.getElementById("no");
 const yesButton = document.getElementById("yes");
 const arena = document.getElementById("arena");
+const overlay = document.getElementById("overlay");
+const resetButton = document.getElementById("reset");
 const secret = document.getElementById("secret");
 
 function moveNo() {
@@ -48,8 +50,13 @@ noButton.addEventListener("touchstart", (e) => {
 }, { passive: false });
 
 yesButton.addEventListener("click", () => {
-  secret.textContent = "Yes clicked.";
-  setTimeout(() => { secret.textContent = ""; }, 900);
+  overlay.classList.add("isVisible");
+  overlay.setAttribute("aria-hidden", "false");
+});
+
+resetButton.addEventListener("click", () => {
+  overlay.classList.remove("isVisible");
+  overlay.setAttribute("aria-hidden", "true");
 });
 
 let buffer = "";
@@ -58,10 +65,16 @@ window.addEventListener("keydown", (e) => {
   const key = (e.key || "").toLowerCase();
   if (!key.match(/^[a-z]$/)) return;
 
-  buffer = (buffer + key).slice(-16);
+  buffer = (buffer + key).slice(-18);
 
   if (buffer.includes("husband")) {
-    secret.textContent = "Husband mode noted.";
+    secret.textContent = "Okay, husband.";
     buffer = "";
+    setTimeout(() => { secret.textContent = ""; }, 1800);
   }
+});
+
+window.addEventListener("load", () => {
+  noButton.style.left = "210px";
+  noButton.style.top = "14px";
 });
