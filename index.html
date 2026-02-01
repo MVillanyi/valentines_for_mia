@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Valentine</title>
   <!-- #no peeking Mia. Thats not fair -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="./style.css?v=9" />
 </head>
 <body>
   <main class="wrap">
@@ -13,26 +13,17 @@
       <div class="topline">For Mia</div>
       <h1>Will you be my Valentine?</h1>
 
-      <div class="buttons">
+      <div class="buttons" id="arena">
         <button id="yes" type="button">Yes</button>
         <button id="no" type="button">No</button>
       </div>
 
-      <p class="hint">No seems a bit shy.</p>
       <p class="secret" id="secret" aria-live="polite"></p>
     </section>
 
-    <section class="overlay" id="overlay" aria-hidden="true">
-      <div class="overlayCard">
-        <div class="small">No expectations. Just us.</div>
-        <div class="big">Happy Valentine’s, Mia.</div>
-        <div class="small2">I’m glad it’s you.</div>
-
-        <button class="reset" id="reset" type="button">Back</button>
-      </div>
-    </section>
+    <section class="overlay" id="overlay" aria-hidden="true"></section>
   </main>
 
-  <script src="script.js"></script>
+  <script src="./script.js?v=9" defer></script>
 </body>
 </html>
