@@ -1,49 +1,108 @@
+:root {
+  --bg1: #f6d1dc;
+  --bg2: #e8b6c5;
+  --black: #0f0f12;
+  --panel: #131318;
+  --rose: #e63973;
+  --burgundy: #7a1f3d;
+  --text: #ffffff;
+  --muted: #b8b8c2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   height: 100vh;
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #ffd6e7;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: radial-gradient(circle at top, var(--bg1), var(--bg2));
+  color: var(--text);
+}
+
+.wrap {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 18px;
 }
 
 .card {
-  background: white;
-  padding: 2rem 3rem;
-  border-radius: 16px;
+  width: min(420px, 92vw);
+  background: linear-gradient(180deg, var(--panel), var(--black));
+  border-radius: 18px;
+  padding: 28px 28px 22px;
   text-align: center;
   position: relative;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 280ms ease, transform 280ms ease;
+}
+
+.card.isHidden {
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+}
+
+.topline {
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.78);
+  margin-bottom: 10px;
+}
+
+h1 {
+  margin: 10px 0 0;
+  font-size: 1.55rem;
+  font-weight: 650;
 }
 
 .buttons {
-  margin-top: 1.5rem;
+  margin-top: 18px;
   position: relative;
-  height: 80px;
+  height: 110px;
 }
 
 button {
-  padding: 0.7rem 1.5rem;
+  padding: 0.75rem 1.7rem;
   font-size: 1rem;
   border-radius: 999px;
   border: none;
   cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
 }
 
 #yes {
-  background: #ff4d8d;
+  background: linear-gradient(135deg, var(--rose), var(--burgundy));
   color: white;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 10px 26px rgba(230, 57, 115, 0.35);
+}
+
+#yes:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(230, 57, 115, 0.5);
 }
 
 #no {
   position: absolute;
-  left: 140px;
-  background: #eee;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  left: 210px;
+  top: 14px;
 }
 
 .hint {
-  margin-top: 1rem;
+  margin: 12px 0 0;
   font-size: 0.9rem;
-  color: #666;
+  color: var(--muted);
 }
+
+.secret {
+  margin: 12px
