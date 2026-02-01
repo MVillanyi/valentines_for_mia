@@ -2,35 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Valentine</title>
-  <!-- #no peeking Mia. Thats not fair -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main class="wrap">
+    <img src="mylittleidea.png" alt="Teddy with heart" class="hero-image" />
 
-    <section class="card" id="ask">
-      <div class="topline">Mia,</div>
+    <section class="card" id="page-ask">
+      <div class="to">Mia,</div>
       <h1>Will you be my Valentine?</h1>
 
-      <div class="buttons" id="arena">
-        <button id="yes">Yes</button>
-        <button id="no">No</button>
+      <div class="buttons">
+        <button id="yes" type="button">Yes</button>
+        <button id="no" type="button">No</button>
       </div>
     </section>
 
-    <section class="overlay" id="overlay">
-      <div class="overlayCard">
-        <h1 id="overlayTitle"></h1>
-        <div id="overlayBody"></div>
-        <button class="reset" id="next"></button>
-      </div>
+    <section class="card hidden" id="page-hurray">
+      <h1>Hurray!</h1>
+      <p>Mark the 14th of February as our day in your calendar.<br />I can’t wait to spend time with you.</p>
+      <button class="next" data-next="page-us">There’s more?</button>
     </section>
 
+    <section class="card hidden" id="page-us">
+      <h2>Our first picture</h2>
+      <img src="us.png" class="content-image" />
+      <button class="next" data-next="page-favorites">There is more</button>
+    </section>
+
+    <section class="card hidden" id="page-favorites">
+      <h2>My favorite pictures of you</h2>
+      <div class="gallery" id="gallery"></div>
+      <button class="next" data-next="page-final">One last thing</button>
+    </section>
+
+    <section class="card hidden" id="page-final">
+      <h2>TBA</h2>
+    </section>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
