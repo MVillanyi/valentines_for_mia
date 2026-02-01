@@ -1,61 +1,44 @@
-const yes = document.getElementById("yes");
-const no = document.getElementById("no");
-const arena = document.getElementById("arena");
-const card = document.getElementById("ask");
+const pages = document.querySelectorAll(".card");
 
-const overlay = document.getElementById("overlay");
-const title = document.getElementById("overlayTitle");
-const body = document.getElementById("overlayBody");
-const next = document.getElementById("next");
+function showPage(id) {
+  pages.forEach(p => p.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+}
 
-let step = 0;
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
 
-no.addEventListener("mouseenter", () => {
-  const a = arena.getBoundingClientRect();
-  const n = no.getBoundingClientRect();
-  no.style.transform = `translate(${Math.random()*(a.width-n.width)}px, ${Math.random()*(a.height-n.height)}px)`;
+noBtn.addEventListener("mouseenter", () => {
+  const parent = noBtn.parentElement.getBoundingClientRect();
+  const btn = noBtn.getBoundingClientRect();
+
+  const maxX = parent.width - btn.width;
+  const maxY = parent.height - btn.height;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
 });
 
-yes.addEventListener("click", () => {
-  card.classList.add("isHidden");
-  overlay.classList.add("isVisible");
-  step = 1;
-
-  title.textContent = "Hurray!";
-  body.innerHTML =
-    "Mark the 14th of February as our day in your calendar.<br>I can’t wait to spend time with you.";
-  next.textContent = "There’s more →";
-
+yesBtn.addEventListener("click", () => {
+  showPage("page-hurray");
   confetti({
-    particleCount: 60,
-    spread: 70,
-    origin: { y: .6 },
-    colors: ["#e63973","#7a1f3d","#ffffff"]
+    particleCount: 80,
+    spread: 60,
+    origin: { y: 0.6 }
   });
 });
 
-next.addEventListener("click", () => {
-  step++;
-
-  if (step === 2) {
-    title.textContent = "Our first picture";
-    body.innerHTML = `
-      <img src="us.png">
-      <p>This is our picture together.<br>I can’t wait to take the next one.</p>`;
-    next.textContent = "There’s more →";
-  }
-
-  else if (step === 3) {
-    title.textContent = "My favorite pictures of you";
-    let imgs = "";
-    for (let i=1;i<=9;i++) imgs += `<img src="favorite_${i}.png">`;
-    body.innerHTML = `<div class="grid">${imgs}</div>`;
-    next.textContent = "One last thing →";
-  }
-
-  else if (step === 4) {
-    title.textContent = "One last thing";
-    body.innerHTML = "<p>TBA</p>";
-    next.style.display = "none";
-  }
+document.querySelectorAll(".next").forEach(btn => {
+  btn.addEventListener("click", () => {
+    showPage(btn.dataset.next);
+  });
 });
+
+const gallery = document.getElementById("gallery");
+for (let i = 1; i <= 9; i++) {
+  const img = document.createElement("img");
+  img.src = `favorite_${i}.png`;
+  gallery.appendChild(img);
+}
